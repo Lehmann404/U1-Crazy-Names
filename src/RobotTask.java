@@ -1,12 +1,17 @@
 import becker.robots.*;
 
+
 /**
  * programmer: Isaac Lehmann
  * date: 2025-02-10
- * description:
+ * description: This program uses robots to spell out the letters "ISAAC".
  */
 public class RobotTask {
 
+    /**
+     * Runs the main task of creating a city and initializing robots
+     * to spell out the word "ISAAC".
+     */
     public void run() {
         City waterloo = new City(6, 29);
         Robot[] robots = new Robot[5];
@@ -27,7 +32,15 @@ public class RobotTask {
         }
     }
 
-
+    /**
+     * Directs the robot to perform tasks based on the given direction, magnitude,
+     * and whether to drop items.
+     *
+     * @param robot     The robot carrying out the task.
+     * @param direction The direction in which the robot moves.
+     * @param magnitude The number of steps the robot moves.
+     * @param dropItems Whether the robot drops items along its path.
+     */
     private void performTask(Robot robot, Direction direction, int magnitude, boolean dropItems) {
         switchDirection(robot, direction);
         for (int i = 0; i < magnitude; i++) {
@@ -38,7 +51,12 @@ public class RobotTask {
         }
     }
 
-
+    /**
+     * Directs the robot to create a specified letter by performing a sequence of tasks.
+     *
+     * @param robot  The robot constructing the letter.
+     * @param letter The letter to be constructed.
+     */
     private void makeLetter(Robot robot, Character letter) {
         switch (letter) {
             case 'I' -> {
@@ -73,6 +91,12 @@ public class RobotTask {
         }
     }
 
+    /**
+     * Adjusts the direction of the robot until it matches the specified direction.
+     *
+     * @param robot     The robot that needs to change its direction.
+     * @param direction The desired direction for the robot.
+     */
     private void switchDirection(Robot robot, Direction direction) {
         while (robot.getDirection() != direction) {
             robot.turnLeft();
