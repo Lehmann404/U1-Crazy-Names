@@ -2,24 +2,28 @@ import becker.robots.*;
 
 
 /**
- * programmer: Isaac Lehmann
- * date: 2025-02-10
- * description: This program uses robots to spell out the letters "ISAAC".
+ * @author Isaac Lehmann
+ * @version 2025-02-10
  */
+
 public class RobotTask {
 
     /**
      * Runs the main task of creating a city and initializing robots
-     * to spell out the word "ISAAC".
+     * to spell out "ISAAC".
      */
     public void run() {
         City waterloo = new City(6, 29);
+        //Created robots in an array for each letter
         Robot[] robots = new Robot[5];
+        // create the new robot in 6 space intervals (i*6) so they are equidistant and make robots invisible.
         for (int i = 0; i < robots.length; i++) {
             robots[i] = new Robot(waterloo, 5, i * 6, Direction.EAST, 100);
             robots[i].setTransparency(1);
         }
 
+        //using java's "thread" feature to have multiple letters written at one time, and creating them as an array
+        //in order to start them in a loop.
         Thread[] threads = {
                 new Thread(() -> makeLetter(robots[0], 'I')),
                 new Thread(() -> makeLetter(robots[1], 'S')),
@@ -27,6 +31,7 @@ public class RobotTask {
                 new Thread(() -> makeLetter(robots[3], 'A')),
                 new Thread(() -> makeLetter(robots[4], 'C'))
         };
+        //starting the threads.
         for (int i = 0; i < threads.length; i++) {
             threads[i].start();
         }
